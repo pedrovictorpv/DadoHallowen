@@ -25,7 +25,7 @@ if (botao) {
 
         // Atualiza o texto se o elemento existir
         if (resultadoElemento) {
-            resultadoElemento.textContent = `Seu personagem é: ${personagemSorteado.moto}`;
+            resultadoElemento.textContent = `Sua Fantasia é: ${personagemSorteado.moto}`;
         }
 
         // Atualiza a imagem se o elemento existir
@@ -34,7 +34,50 @@ if (botao) {
             imagemElemento.style.display = "block";
         }
     });
+    
 } else {
-    // Opcional: log para ajudar debug se o botão não for encontrado
+    
     console.warn('Elemento #botao não encontrado. Nenhum listener foi adicionado.');
+}
+// Função para fazer as imagens girarem antes de mostrar o resultado
+function girarImagensAntesDoResultado() {
+    let contador = 0;
+    const tempoGiro = 100; // tempo entre trocas de imagem (ms)
+    const duracaoTotal = 2000; // tempo total do giro (2 segundos)
+    const inicio = Date.now();
+
+    const intervalo = setInterval(() => {
+        const indiceAleatorio = Math.floor(Math.random() * carro.length);
+        if (imagemElemento) {
+            imagemElemento.src = carro[indiceAleatorio].imagem;
+            imagemElemento.style.display = "block";
+        }
+
+        contador++;
+
+        // Para o giro depois do tempo total
+        if (Date.now() - inicio >= duracaoTotal) {
+            clearInterval(intervalo);
+
+            // Depois do giro, sorteia o resultado final
+            const indiceFinal = Math.floor(Math.random() * carro.length);
+            const personagemSorteado = carro[indiceFinal];
+
+            if (resultadoElemento) {
+                resultadoElemento.textContent = `Sua Fantasia é: ${personagemSorteado.moto}`;
+            }
+
+            if (imagemElemento) {
+                imagemElemento.src = personagemSorteado.imagem;
+            }
+        }
+    }, tempoGiro);
+}
+
+// Adiciona a nova funcionalidade sem mexer no código principal
+if (botao) {
+    botao.removeEventListener("click", () => {}); // só pra garantir que não duplica
+    botao.addEventListener("click", function () {
+        girarImagensAntesDoResultado();
+    });
 }
