@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body {
+    background-color: #000;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+
+video.background-video {
+    position: fixed;
+    inset: 0; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: -2; 
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: -1; 
+    pointer-events: none;
+}
+
+/* Garante que o main (conteúdo) fique acima do vídeo */
+main {
+    position: relative;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+
+.card {
+    --background: linear-gradient(to left, #eb8110 0%, #dc0c0c 100%);
+    width: 250px;
+    height: 254px;
+    padding:auto;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    background: #f7ba2b;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img {
+    width: 230px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: .7rem;
+}
+
+/* Glow efeito atrás */
+.card::after {
+    position: absolute;
+    content: "";
+    top: 30px;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    transform: scale(0.8);
+    filter: blur(25px);
+    background: var(--background);
+    transition: opacity .5s;
+}
+
+.card:hover::after {
+    opacity: 0;
+}
+
+/* Textos */
+.titulo {
+    color: orange;
+    font-size: 100px;
+    text-shadow: 2px 2px 4px #000000;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+
+}
+
+.subtitulo {
+    color: white;
+    font-size: 50px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+
+#botao {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(43, 43, 44);
+    color: rgb(230, 127, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    
+}
+
+#botao:hover {
+    background-color: rgb(70, 70, 72);
+}
+
+id.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+figure {
+    align-items: baseline;
+    padding: 5px 20px;
+
+    
+    
+}
+
